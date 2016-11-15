@@ -9,28 +9,28 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       first: {
-        type: Sequelize.INT
+        type: Sequelize.INTEGER
       },
       second: {
-        type: Sequelize.INT
+        type: Sequelize.INTEGER
       },
       third: {
-        type: Sequelize.INT
+        type: Sequelize.INTEGER
       },
       fourth: {
-        type: Sequelize.INT
+        type: Sequelize.INTEGER
       },
       fifth: {
-        type: Sequelize.INT
+        type: Sequelize.INTEGER
       },
       sixth: {
-        type: Sequelize.INT
+        type: Sequelize.INTEGER
       },
       jolly: {
-        type: Sequelize.INT
+        type: Sequelize.INTEGER
       },
       star: {
-        type: Sequelize.INT
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
@@ -39,6 +39,15 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
+      },
+      GameId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Games',
+          key: 'id'
+        },
+        onUpdate: 'cascade',
+        onDelete: 'cascade'
       }
     });
   },

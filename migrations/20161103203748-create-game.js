@@ -9,10 +9,10 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       number: {
-        type: Sequelize.INT
+        type: Sequelize.INTEGER
       },
       year: {
-        type: Sequelize.INT
+        type: Sequelize.INTEGER
       },
       date: {
         type: Sequelize.DATE

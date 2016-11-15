@@ -1,0 +1,15 @@
+{
+  "development": {
+    "username": "root",
+    "password": "",
+    "database": "games",
+    "host"    : "localhost",
+    "port"    : "3306",
+    "dialect" : "mysql",
+    "logging" : true
+  },
+  "test": {
+  },
+  "production": {
+  }
+}
