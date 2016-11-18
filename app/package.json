@@ -1,0 +1,30 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "Describe app here",
+  "private": true,
+  "scripts": {
+    "build": "nwb build-react-app",
+    "clean": "nwb clean-app",
+    "prestart": "if [ ! -d node_modules ]; then yarn install; fi",
+    "start": "nwb serve-react-app",
+    "test": "nwb test",
+    "test:coverage": "nwb test --coverage",
+    "test:watch": "nwb test --server"
+  },
+  "dependencies": {
+    "d3": "^4.3.0",
+    "lodash": "^4.17.2",
+    "moment": "^2.16.0",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "react-refetch": "^1.0.0-beta.10",
+    "recharts": "^0.18.0"
+  },
+  "devDependencies": {
+    "nwb": "0.12.x"
+  },
+  "author": "",
+  "license": "MIT",
+  "repository": ""
+}

@@ -3,11 +3,7 @@ const express = require('express');
 const router  = express.Router();
 
 router.get('/', (req, res) => {
-  models.Game.findAll({
-    include: [ models.Draft ]
-  }).then((data) => {
-    res.send(data);
-  });
+  res.send('200');
 });
 
 module.exports = router;

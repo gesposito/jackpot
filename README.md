@@ -1,6 +1,6 @@
 # Jackpot
 
-Customized version of [express-example](https://github.com/sequelize/express-example) showing a sample application (data is from [superenalotto](https://www.sisal.it/superenalotto/estrazioni)).
+Customized version of Sequelize's [express-example](https://github.com/sequelize/express-example) showing a sample application (data is from [superenalotto](https://www.sisal.it/superenalotto/estrazioni)).
 
 ## Requirements
 * You'll need MySQL installed on your machine (i.e. with `brew install mysql` or Docker)

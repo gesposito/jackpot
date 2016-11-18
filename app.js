@@ -4,11 +4,12 @@ const favicon       = require('serve-favicon');
 const logger        = require('morgan');
 const cookieParser  = require('cookie-parser');
 const bodyParser    = require('body-parser');
+const cors          = require('cors');
 
 const routes        = require('./routes/index');
 const games         = require('./routes/games');
 
-const app = express();
+const app           = express();
 
 // view engine setup
 // app.set('views', path.join(__dirname, 'views'));
@@ -20,6 +21,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(cors());
 
 app.use('/'     , routes);
 app.use('/games', games);
