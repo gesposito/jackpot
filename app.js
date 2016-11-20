@@ -1,18 +1,19 @@
 const express       = require('express');
+
 const path          = require('path');
 const favicon       = require('serve-favicon');
 const logger        = require('morgan');
+
 const cookieParser  = require('cookie-parser');
 const bodyParser    = require('body-parser');
 const cors          = require('cors');
 
+/* Routes */
 const routes        = require('./routes/index');
 const games         = require('./routes/games');
+const reports       = require('./routes/reports');
 
 const app           = express();
-
-// view engine setup
-// app.set('views', path.join(__dirname, 'views'));
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
@@ -24,8 +25,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(cors());
 
-app.use('/'     , routes);
-app.use('/games', games);
+app.use('/'     ,   routes);
+app.use('/games',   games);
+app.use('/reports', reports);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -38,9 +40,9 @@ app.use((req, res, next) => {
 // no stacktraces leaked to user unless in development environment
 app.use((err, req, res, next) => {
   res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: (app.get('env') === 'development') ? err : {}
+  res.json({
+    message : err.message,
+    error   : (app.get('env') === 'development') ? err : {}
   });
 });
 

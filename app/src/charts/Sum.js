@@ -1,11 +1,12 @@
 import React from 'react';
 
 import { sum, minBy, maxBy, omit } from 'lodash';
-import moment from 'moment';
 import * as d3 from "d3";
 
 import { ScatterChart, Scatter, CartesianGrid, Tooltip } from 'recharts';
 import { XAxis, YAxis, ZAxis } from 'recharts';
+
+import { formatter } from './utils';
 
 const Sum = React.createClass({
   render: function() {
@@ -21,16 +22,16 @@ const Sum = React.createClass({
       };
     });
 
-    const yDomain = [minBy(games, 'sum').sum, maxBy(games, 'sum').sum];
     const xDomain = [games[0].time, games[games.length - 1].time];
+    const yDomain = [minBy(games, 'sum').sum, maxBy(games, 'sum').sum];
 
     // Show by sum
     return (
-      <ScatterChart width={1400} height={400} margin={{ top: 40, right: 40, bottom: 40, left: 40 }}>
+      <ScatterChart width={1400} height={400}>
+        <XAxis label="Date" dataKey={'time'} domain={xDomain} tickFormatter={formatter} />
         <YAxis label="Sum" dataKey={'sum'} domain={yDomain} />
-        <XAxis label="Date" dataKey={'time'} domain={xDomain} tickFormatter={formatter}/>
 
-        <Scatter data={games} />
+        <Scatter data={games} fill="#50ABD2" />
 
         <Tooltip content={<SumTooltip />} />
         <CartesianGrid />
@@ -52,9 +53,5 @@ const SumTooltip = React.createClass({
     );
   }
 });
-
-const formatter = (time) => {
-  return moment(time).format('MM/DD/YYYY');
-};
 
 export default Sum;

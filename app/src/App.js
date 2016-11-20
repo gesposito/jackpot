@@ -1,8 +1,10 @@
 import React from 'react';
-import { connect /* , PromiseState */ } from 'react-refetch';
+import { connect, PromiseState } from 'react-refetch';
 
 import { includes, pull } from 'lodash';
+
 import Sum from './charts/Sum';
+import Report from './charts/Report';
 
 import './App.css';
 
@@ -20,21 +22,27 @@ const App = React.createClass({
 
     this.setState({
       'filters': includes(filters, field) ? pull(filters, field) : filters.concat(field)
+    }, () => {
+      this.props.fetchReports(this.state.filters);
     });
   },
 
   render() {
-    const { gamesFetch } = this.props
+    const { gamesFetch, reportsFetch } = this.props
     const { filters } = this.state;
     const { onFilter } = this;
 
-    if (gamesFetch.pending) {
+    const allFetches = PromiseState.all([gamesFetch, reportsFetch])
+
+    if (allFetches.pending) {
       return <div>Loading...</div>
-    } else if (gamesFetch.rejected) {
-      return <div>{gamesFetch.reason}</div>
+    } else if (allFetches.rejected) {
+      return <div>{allFetches.reason}</div>
     }
 
     // gamesFetch.fulfilled
+    const [games, reports] = allFetches.value
+
     return (
       <div className="App">
         <div>
@@ -47,8 +55,13 @@ const App = React.createClass({
             <input type="checkbox" checked={!includes(filters, 'star')} onChange={(e) => onFilter('star')} />
           </div>
         </div>
+
         <Sum
-          data={gamesFetch.value}
+          data={games}
+          filters={filters}
+        />
+        <Report
+          data={reports}
           filters={filters}
         />
       </div>
@@ -59,6 +72,11 @@ const App = React.createClass({
 
 export default connect(
   (props) => ({
-    'gamesFetch': `${api.url}/games/latest`,
+    'gamesFetch'      : `${api.url}/games/latest`,
+
+    'reportsFetch'    : `${api.url}/reports/latest`,
+    'fetchReports'    : filters => ({
+      'reportsFetch'  : `${api.url}/reports/latest?filters=${filters}`
+    })
   })
 )(App);
