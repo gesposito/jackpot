@@ -3,6 +3,7 @@ const request = require('request-promise-native');
 const fs      = require("fs");
 
 const URL     = 'http://www.gntn-pgd.it/gntn-info-web/rest/gioco/superenalotto/estrazioni/archivioconcorso';
+// const URL     = 'http://www.gntn-pgd.it/gntn-info-web/rest/gioco/sivincetutto/estrazioni/archivioconcorso';
 
 let games     = [];
 

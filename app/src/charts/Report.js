@@ -15,7 +15,7 @@ const Report = React.createClass({
     const reports = (data).map((report) => {
       return {
         ...report,
-        'time'  : new Date(report.date).getTime(),
+        'time': new Date(report.date).getTime(),
       };
     });
 

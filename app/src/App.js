@@ -46,14 +46,28 @@ const App = React.createClass({
     return (
       <div className="App">
         <div>
-          <div>
-            Include 'Jolly' number
-            <input type="checkbox" checked={!includes(filters, 'jolly')} onChange={(e) => onFilter('jolly')} />
-          </div>
-          <div>
-            Include 'Star' number
-            <input type="checkbox" checked={!includes(filters, 'star')} onChange={(e) => onFilter('star')} />
-          </div>
+          {(() => {
+            const pick = 'jolly';
+            if (games[0].Draft[pick]) {
+              return (
+                <div>
+                  Include "{pick}" number
+                  <input type="checkbox" checked={!includes(filters, pick)} onChange={(e) => onFilter(pick)} />
+                </div>
+              );
+            }
+          })()}
+          {(() => {
+            const pick = 'star';
+            if (games[0].Draft[pick]) {
+              return (
+                <div>
+                  Include "{pick}" number
+                  <input type="checkbox" checked={!includes(filters, pick)} onChange={(e) => onFilter(pick)} />
+                </div>
+              );
+            }
+          })()}
         </div>
 
         <Sum

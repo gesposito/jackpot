@@ -25,7 +25,7 @@ router.get('/latest', (req, res) => {
   .then((data) => {
     const reports = data.reverse().map((game) => {
       const values  = game.Draft.dataValues;
-      const picks   = Object.keys(values).map(k => values[k]);
+      const picks   = Object.keys(values).map(k => values[k]).filter(n => n !== null);
 
       return Object.assign(
         {},
